@@ -14,7 +14,7 @@
           {{ message.username }}: <span>{{ message.text }}</span>
         </div>
         <div class="createdAt">
-          createdAt : <span>{{ message.createdAt }}</span>
+          createdAt : <span>{{ toLocalTime(message.createdAt) }}</span>
         </div>
       </div>
     </div>
@@ -44,6 +44,11 @@ const sendMessage = (message) => {
   console.log('message', message)
   props.onSendMessage(message)
   newMessage.value = ''
+}
+
+const toLocalTime = (utcDate) => {
+  const date = new Date(utcDate)
+  return date.toLocaleString() // Converts to local time string
 }
 </script>
 
