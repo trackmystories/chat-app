@@ -61,6 +61,7 @@ onMounted(() => {
 <style scoped>
 #chat-layout {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
 }
@@ -73,10 +74,19 @@ onMounted(() => {
 }
 
 .right {
-  width: 100%;
+  width: 80%;
 }
 
 .right h2 {
   margin-left: 30px;
+}
+
+@media (min-width: 400px) {
+  #login {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;
+  }
 }
 </style>
