@@ -48,7 +48,7 @@ const sendMessage = (message) => {
 
 const toLocalTime = (utcDate) => {
   const date = new Date(utcDate)
-  return date.toLocaleString() // Converts to local time string
+  return date.toLocaleString()
 }
 </script>
 
