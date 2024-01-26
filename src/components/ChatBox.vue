@@ -10,7 +10,12 @@
         }"
         class="message"
       >
-        <strong>{{ message.username }}:</strong> <span>{{ message.text }}</span>
+        <div>
+          {{ message.username }}: <span>{{ message.text }}</span>
+        </div>
+        <div class="createdAt">
+          createdAt : <span>{{ message.createdAt }}</span>
+        </div>
       </div>
     </div>
     <div v-if="canSendMessage">
@@ -67,22 +72,22 @@ const sendMessage = (message) => {
 
 .message {
   display: flex;
+  flex-direction: column;
   margin: 5px;
   padding: 10px;
-  background-color: blue !important;
-  border-radius: 10px !important;
-  max-width: 70% !important;
+  background-color: #bab7ad;
+  border-radius: 10px;
 }
 
 .my-message {
   display: flex !important;
   align-self: flex-end !important;
-  background-color: green !important;
+  background-color: #6cf589 !important;
 }
 
 .other-message {
   align-self: flex-start !important;
-  background-color: blue !important;
+  background-color: #bab7ad;
 }
 input {
   flex-grow: 1;
@@ -95,6 +100,7 @@ input {
 button {
   padding: 10px 20px;
   border-radius: 5px;
+  width: 20%;
   background-color: #4caf50;
   color: white;
   border: none;

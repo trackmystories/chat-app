@@ -9,7 +9,7 @@
       <button @click="logout">Logout</button>
     </div>
     <div class="right">
-      <h2 v-if="chatStore.selectedChat">{{ chatStore.selectedChat.name }}</h2>
+      <h2 v-if="chatStore.selectedChat">{{ chatStore.selectedChat.name }} Channel</h2>
       <ChatBox
         :messages="chatStore.messages"
         :currentUserId="chatStore.currentUserId"

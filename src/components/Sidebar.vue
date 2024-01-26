@@ -37,16 +37,18 @@ const selectChat = (chatId) => {
 
 .chat-item {
   display: flex;
-  border: 1px solid #333;
   margin: 20px;
   width: 90%;
   border-radius: 6px;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  border: 0.8px solid #333;
 }
 
 .selected-chat {
   background-color: orange;
+  color: #fff;
+  border: none;
 }
 </style>
