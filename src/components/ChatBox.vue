@@ -103,7 +103,6 @@ input {
 }
 
 button {
-  padding: 10px 20px;
   border-radius: 5px;
   width: 20%;
   background-color: #4caf50;
@@ -164,7 +163,7 @@ form {
   }
 
   button {
-    width: 100%;
+    width: auto;
   }
 }
 </style>
