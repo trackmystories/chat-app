@@ -1,5 +1,6 @@
 <template>
   <div id="sidebar">
+    <div class="title">Chat Channels</div>
     <div
       v-for="chat in chats"
       :key="chat.id"
@@ -43,12 +44,19 @@ const selectChat = (chatId) => {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
   border: 0.8px solid #333;
 }
 
 .selected-chat {
   background-color: orange;
   color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
   border: none;
+}
+
+.title {
+  color: #333;
+  font-family: Arial, Helvetica, sans-serif;
 }
 </style>

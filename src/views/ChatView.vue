@@ -64,6 +64,8 @@ onMounted(() => {
   height: 100vh;
   align-items: center;
   justify-content: space-evenly;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #333;
 }
 
 .left {
