@@ -14,10 +14,30 @@ import {
 export const useChatStore = defineStore('chatStore', {
   state: () => ({
     chats: [
-      { id: 'cats', name: 'Cats' },
-      { id: 'dogs', name: 'Dogs' },
-      { id: 'books', name: 'Books' },
-      { id: 'travel', name: 'Travel' }
+      {
+        id: 'cats',
+        name: 'Cats',
+        about:
+          'On the Cat Chat channel, fellow cat enthusiasts often share heartwarming stories of their feline friends'
+      },
+      {
+        id: 'dogs',
+        name: 'Dogs',
+        about:
+          'In the Dog Chat channel, members joyfully post photos of their dogs adventures, showcasing their playful and loyal nature.'
+      },
+      {
+        id: 'books',
+        name: 'Books',
+        about:
+          'The Book Chat channel is a haven for bibliophiles, where they delve into discussions about their latest reads and timeless classics'
+      },
+      {
+        id: 'travel',
+        name: 'Travel',
+        about:
+          'The Travel Chat channel is filled with vibrant stories and tips from globetrotters sharing their experiences from different corners of the world'
+      }
     ],
     selectedChat: null,
     messages: [],

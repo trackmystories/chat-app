@@ -9,7 +9,10 @@
       <button @click="logout">Logout</button>
     </div>
     <div class="right">
-      <h2 v-if="chatStore.selectedChat">{{ chatStore.selectedChat.name }} Channel</h2>
+      <h2 v-if="chatStore.selectedChat && chatStore.currentUser">
+        {{ chatStore.currentUser.username || chatStore.currentUser.email }} |
+        {{ chatStore.selectedChat.name }} Channel
+      </h2>
       <ChatBox
         :messages="chatStore.messages"
         :currentUserId="chatStore.currentUserId"
@@ -61,7 +64,7 @@ onMounted(() => {
 <style scoped>
 #chat-layout {
   display: flex;
-  height: 100vh;
+  height: 100%;
   align-items: center;
   justify-content: space-evenly;
   font-family: Arial, Helvetica, sans-serif;
@@ -81,6 +84,8 @@ onMounted(() => {
 
 .right h2 {
   margin-left: 30px;
+  color: grey;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 @media (max-width: 768px) {

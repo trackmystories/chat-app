@@ -8,7 +8,8 @@
       :class="{ 'selected-chat': chat.id === selectedChatId }"
       @click="selectChat(chat.id)"
     >
-      {{ chat.name }}
+      <span class="name"> {{ chat.name }}</span>
+      <span class="about"> {{ chat.about }}</span>
     </div>
   </div>
 </template>
@@ -38,25 +39,39 @@ const selectChat = (chatId) => {
 
 .chat-item {
   display: flex;
-  margin: 20px;
+  flex-direction: column;
+  margin: 5px;
+  height: 80px;
   width: 90%;
   border-radius: 6px;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   cursor: pointer;
   font-family: Arial, Helvetica, sans-serif;
-  border: 0.8px solid #333;
+  background-color: #cedcf2;
+  color: #fff;
+  padding: 10px;
 }
 
 .selected-chat {
-  background-color: orange;
+  background-color: #7898fa;
   color: #fff;
   font-family: Arial, Helvetica, sans-serif;
   border: none;
 }
 
 .title {
-  color: #333;
-  font-family: Arial, Helvetica, sans-serif;
+  color: #5451f0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.name {
+  font-size: 12x;
+  margin-bottom: 12px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.about {
+  font-size: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 </style>

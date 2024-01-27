@@ -102,7 +102,6 @@ input[type='text'],
 input[type='email'],
 input[type='password'] {
   width: 100%;
-  padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-top: 10px;

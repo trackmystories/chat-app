@@ -20,7 +20,7 @@
     </div>
     <div v-if="canSendMessage">
       <form @submit.prevent="sendMessage(newMessage)">
-        <input v-model="newMessage" placeholder="Type a message" />
+        <input v-model="newMessage" placeholder="message..." />
         <button type="submit">Send</button>
       </form>
     </div>
@@ -62,7 +62,7 @@ const toLocalTime = (utcDate) => {
   padding: 10px;
   border-radius: 10px;
   height: 500px;
-  background: #fff;
+  background: #8ecdf5;
   color: #fff;
 }
 
@@ -87,12 +87,13 @@ const toLocalTime = (utcDate) => {
 .my-message {
   display: flex !important;
   align-self: flex-end !important;
-  background-color: #6cf589 !important;
+  background-color: #7898fa !important;
 }
 
 .other-message {
   align-self: flex-start !important;
-  background-color: #bab7ad;
+  background-color: #fff;
+  color: #bab7ad;
 }
 input {
   flex-grow: 1;
