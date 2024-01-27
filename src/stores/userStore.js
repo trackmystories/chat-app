@@ -7,7 +7,8 @@ export const useUserStore = defineStore('user', {
     email: '',
     password: '',
     username: '',
-    isSignUp: false
+    isSignUp: false,
+    errorMessage: ''
   }),
   actions: {
     updateEmail(newEmail) {
@@ -26,9 +27,18 @@ export const useUserStore = defineStore('user', {
       const auth = getAuth(app)
       try {
         await signInAnonymously(auth)
+        this.clearErrorMessage()
       } catch (error) {
         console.error('Guest login error:', error)
+        this.setErrorMessage(error.message)
       }
+    },
+    setErrorMessage(message) {
+      this.errorMessage = message
+    },
+
+    clearErrorMessage() {
+      this.errorMessage = ''
     }
   }
 })

@@ -1,11 +1,10 @@
 <template>
   <div id="login">
-    <h1>WELCOME TO CHAT APP</h1>
-    <form @submit.prevent="handleSubmit">
+    <span class="title">WELCOME TO CHAT APP</span>
+    <form class="form" @submit.prevent="handleSubmit">
       <div v-if="userStore.isSignUp">
-        <label for="username">Username : </label>
         <input
-          placeholder="username"
+          placeholder=" ENTER USERNAME"
           type="text"
           id="username"
           v-model="userStore.username"
@@ -13,19 +12,25 @@
         />
       </div>
       <div>
-        <label for="email">Email : </label>
-        <input placeholder="email" type="email" id="email" v-model="userStore.email" required />
+        <input
+          placeholder=" ENTER EMAIL"
+          type="email"
+          id="email"
+          v-model="userStore.email"
+          required
+        />
       </div>
       <div>
-        <label for="password">Password : </label>
         <input
-          placeholder="password"
+          placeholder=" ENTER PASSWORD"
           type="password"
           id="password"
           v-model="userStore.password"
           required
         />
       </div>
+
+      <div v-if="userStore.errorMessage" class="error-message">{{ userStore.errorMessage }}</div>
 
       <button type="submit" v-if="!userStore.isSignUp">Login</button>
       <button type="submit" v-if="userStore.isSignUp">Sign Up</button>
@@ -48,6 +53,7 @@ import {
 } from 'firebase/auth'
 import { getFirestore, doc, setDoc } from 'firebase/firestore'
 import { useUserStore } from '../stores/userStore'
+import { getFriendlyErrorMessage } from '@/utils/errorHandling'
 
 export default {
   name: 'LoginView',
@@ -57,6 +63,7 @@ export default {
     const userStore = useUserStore()
 
     const handleSubmit = async () => {
+      userStore.clearErrorMessage()
       try {
         if (userStore.isSignUp) {
           const userCredential = await createUserWithEmailAndPassword(
@@ -72,6 +79,8 @@ export default {
         router.push('/chat')
       } catch (error) {
         console.error('Authentication error:', error)
+        const friendlyMessage = getFriendlyErrorMessage(error.code)
+        userStore.setErrorMessage(friendlyMessage)
       }
     }
     const handleGuestLogin = async () => {
@@ -90,21 +99,30 @@ export default {
 
 <style>
 #login {
-  margin: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 label {
   display: block;
   margin-bottom: 5px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #2e5799;
 }
 
 input[type='text'],
 input[type='email'],
 input[type='password'] {
   width: 100%;
+  height: 60px;
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-top: 10px;
+  width: 375px;
   margin-bottom: 10px;
 }
 
@@ -123,10 +141,26 @@ button:hover {
   background-color: #45a049;
 }
 
-@media (min-width: 600px) {
-  #login {
-    max-width: 400px;
-    margin: 0 auto;
-  }
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  width: 375px;
+}
+
+.title {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.5rem;
+  text-align: center;
+  color: #45a049;
+  margin-bottom: 20px;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin-bottom: 10px;
 }
 </style>

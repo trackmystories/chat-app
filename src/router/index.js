@@ -24,7 +24,6 @@ const router = createRouter({
   ]
 })
 
-// Navigation guard
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth)
   const auth = getAuth()
