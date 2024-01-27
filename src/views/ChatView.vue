@@ -61,7 +61,7 @@ onMounted(() => {
 <style scoped>
 #chat-layout {
   display: flex;
-  flex-direction: row;
+  height: 100vh;
   align-items: center;
   justify-content: space-evenly;
 }
@@ -81,12 +81,26 @@ onMounted(() => {
   margin-left: 30px;
 }
 
-@media (min-width: 400px) {
-  #login {
-    display: flex;
-    flex-direction: column;
-    max-width: 400px;
-    margin: 0 auto;
+@media (max-width: 768px) {
+  .left,
+  .right {
+    width: 100%;
+    align-items: center;
+  }
+
+  #chat-layout {
+    flex-direction: column-reverse;
+  }
+
+  .right h2 {
+    margin-left: 10px;
+    font-size: 1.2em;
+  }
+}
+
+@media (max-width: 400px) {
+  .right h2 {
+    font-size: 1em;
   }
 }
 </style>

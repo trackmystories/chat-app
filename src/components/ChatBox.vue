@@ -120,4 +120,51 @@ form {
   display: flex;
   margin-top: 10px;
 }
+
+@media (max-width: 768px) {
+  .chat-container {
+    margin: 10px;
+    padding: 5px;
+  }
+
+  .messages {
+    padding: 5px;
+  }
+
+  .message {
+    margin: 3px;
+    padding: 5px;
+    font-size: 0.9em;
+  }
+
+  input,
+  button {
+    padding: 8px;
+    font-size: 0.9em;
+  }
+
+  button {
+    width: 30%;
+  }
+
+  form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  input {
+    margin-bottom: 10px;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .message {
+    font-size: 0.8em;
+  }
+
+  button {
+    width: 100%;
+  }
+}
 </style>
