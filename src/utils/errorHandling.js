@@ -1,4 +1,4 @@
-export function getFriendlyErrorMessage(errorCode: string): string {
+export function getFriendlyErrorMessage(errorCode) {
   switch (errorCode) {
     case 'auth/invalid-email':
       return 'The email address is invalid.'

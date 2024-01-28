@@ -33,6 +33,12 @@ export const useUserStore = defineStore('user', {
         console.error('Guest login error:', error)
         this.isGuest = false
       }
+    },
+    setErrorMessage(message) {
+      this.errorMessage = message
+    },
+    clearErrorMessage() {
+      this.errorMessage = ''
     }
   }
 })

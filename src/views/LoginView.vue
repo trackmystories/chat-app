@@ -1,6 +1,6 @@
 <template>
   <div id="login">
-    <h1>WELCOME TO CHAT APP</h1>
+    <h1 class="title">WELCOME TO CHAT APP</h1>
     <form @submit.prevent="handleSubmit">
       <div v-if="userStore.isSignUp">
         <input
@@ -22,6 +22,9 @@
           v-model="userStore.password"
           required
         />
+      </div>
+      <div v-if="userStore.errorMessage" class="error-message">
+        {{ userStore.errorMessage }}
       </div>
 
       <button type="submit" v-if="!userStore.isSignUp">Login</button>
@@ -45,6 +48,7 @@ import {
 } from 'firebase/auth'
 import { getFirestore, doc, setDoc } from 'firebase/firestore'
 import { useUserStore } from '../stores/userStore'
+import { getFriendlyErrorMessage } from '@/utils/errorHandling'
 
 export default {
   name: 'LoginView',
@@ -69,6 +73,8 @@ export default {
         router.push('/chat')
       } catch (error) {
         console.error('Authentication error:', error)
+        const friendlyMessage = getFriendlyErrorMessage(error.code)
+        userStore.setErrorMessage(friendlyMessage) // Set friendly error message
       }
     }
     const handleGuestLogin = async () => {
@@ -77,6 +83,8 @@ export default {
         router.push('/chat')
       } catch (error) {
         console.error('Guest login error:', error)
+        const friendlyMessage = getFriendlyErrorMessage(error.code)
+        userStore.setErrorMessage(friendlyMessage) // Set friendly error message
       }
     }
 
@@ -119,6 +127,20 @@ button {
 
 button:hover {
   background-color: #45a049;
+}
+
+.title {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.5rem;
+  text-align: center;
+  color: #45a049;
+  margin-bottom: 20px;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 @media (min-width: 600px) {
