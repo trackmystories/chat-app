@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { getAuth, onAuthStateChanged, User } from 'firebase/auth'
 import {
   getFirestore,
   collection,
@@ -8,8 +8,24 @@ import {
   onSnapshot,
   addDoc,
   doc,
-  getDoc
+  getDoc,
+  QueryDocumentSnapshot,
+  DocumentData
 } from 'firebase/firestore'
+
+interface Chat {
+  id: string
+  name: string
+  about: string
+}
+
+interface Message {
+  id: string
+  text: string
+  createdAt: Date
+  userId: string
+  username: string
+}
 
 export const useChatStore = defineStore('chatStore', {
   state: () => ({
@@ -38,32 +54,37 @@ export const useChatStore = defineStore('chatStore', {
         about:
           'The Travel Chat channel is filled with vibrant stories and tips from globetrotters sharing their experiences from different corners of the world'
       }
-    ],
-    selectedChat: null,
-    messages: [],
-    currentUser: null,
-    currentUserId: null,
+    ] as Chat[],
+    selectedChat: null as Chat | null,
+    messages: [] as Message[],
+    currentUser: null as User | null,
+    currentUserId: '' as string,
     currentUserUsername: ''
   }),
   actions: {
-    selectChat(chatId) {
-      this.selectedChat = this.chats.find((chat) => chat.id === chatId)
-      this.fetchMessages(chatId)
+    updateCurrentUser(user) {
+      this.currentUser = user
     },
-    async fetchMessages(chatId) {
+    selectChat(chatId: string) {
+      this.selectedChat = this.chats.find((chat) => chat.id === chatId) || null
+      if (this.selectedChat) {
+        this.fetchMessages(chatId)
+      }
+    },
+    async fetchMessages(chatId: string) {
       const db = getFirestore()
       const messagesRef = collection(db, `chats/${chatId}/messages`)
       const messagesQuery = query(messagesRef, orderBy('createdAt'))
 
       onSnapshot(messagesQuery, (querySnapshot) => {
-        this.messages = querySnapshot.docs.map((doc) => ({
+        this.messages = querySnapshot.docs.map((doc: QueryDocumentSnapshot<DocumentData>) => ({
           id: doc.id,
           ...doc.data(),
           createdAt: doc.data().createdAt.toDate()
-        }))
+        })) as Message[]
       })
     },
-    async sendMessage(messageText) {
+    async sendMessage(messageText: string) {
       if (!messageText.trim() || !this.selectedChat) return
       const db = getFirestore()
       const auth = getAuth()
@@ -98,7 +119,7 @@ export const useChatStore = defineStore('chatStore', {
         }
       })
     },
-    canSendMessage() {
+    canSendMessage(): boolean {
       return this.currentUserUsername !== 'Anonymous' && this.currentUserUsername !== ''
     }
   }

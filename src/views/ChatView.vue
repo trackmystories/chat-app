@@ -10,8 +10,7 @@
     </div>
     <div class="right">
       <h2 v-if="chatStore.selectedChat && chatStore.currentUser">
-        {{ chatStore.currentUser.username || chatStore.currentUser.email }} |
-        {{ chatStore.selectedChat.name }} Channel
+        {{ chatStore.currentUser.email }} | {{ chatStore.selectedChat.name }} Channel
       </h2>
       <ChatBox
         :messages="chatStore.messages"
@@ -23,7 +22,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'

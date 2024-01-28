@@ -1,9 +1,17 @@
 import { defineStore } from 'pinia'
-import { getAuth, signInAnonymously } from 'firebase/auth'
-import app from '@/firebase'
+import { getAuth, signInAnonymously, AuthError } from 'firebase/auth'
+import app from '../firebase.ts'
+
+interface UserState {
+  email: string
+  password: string
+  username: string
+  isSignUp: boolean
+  errorMessage: string
+}
 
 export const useUserStore = defineStore('user', {
-  state: () => ({
+  state: (): UserState => ({
     email: '',
     password: '',
     username: '',
@@ -11,13 +19,13 @@ export const useUserStore = defineStore('user', {
     errorMessage: ''
   }),
   actions: {
-    updateEmail(newEmail) {
+    updateEmail(newEmail: string) {
       this.email = newEmail
     },
-    updatePassword(newPassword) {
+    updatePassword(newPassword: string) {
       this.password = newPassword
     },
-    updateUsername(newUsername) {
+    updateUsername(newUsername: string) {
       this.username = newUsername
     },
     toggleSignUp() {
@@ -30,13 +38,12 @@ export const useUserStore = defineStore('user', {
         this.clearErrorMessage()
       } catch (error) {
         console.error('Guest login error:', error)
-        this.setErrorMessage(error.message)
+        this.setErrorMessage((error as AuthError).message)
       }
     },
-    setErrorMessage(message) {
+    setErrorMessage(message: string) {
       this.errorMessage = message
     },
-
     clearErrorMessage() {
       this.errorMessage = ''
     }

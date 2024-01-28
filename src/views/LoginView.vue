@@ -3,16 +3,16 @@
     <span class="title">WELCOME TO CHAT APP</span>
     <form class="form" @submit.prevent="handleSubmit">
       <div v-if="userStore.isSignUp">
-        <input
-          placeholder=" ENTER USERNAME"
-          type="text"
+        <Input
           id="username"
+          type="text"
+          placeholder="ENTER USERNAME"
           v-model="userStore.username"
           required
         />
       </div>
       <div>
-        <input
+        <Input
           placeholder=" ENTER EMAIL"
           type="email"
           id="email"
@@ -21,7 +21,7 @@
         />
       </div>
       <div>
-        <input
+        <Input
           placeholder=" ENTER PASSWORD"
           type="password"
           id="password"
@@ -42,7 +42,7 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { useRouter } from 'vue-router'
 import app from '@/firebase'
 import {
@@ -54,45 +54,40 @@ import {
 import { getFirestore, doc, setDoc } from 'firebase/firestore'
 import { useUserStore } from '../stores/userStore'
 import { getFriendlyErrorMessage } from '@/utils/errorHandling'
+import Input from '@/components/Input.vue'
 
-export default {
-  name: 'LoginView',
-  setup() {
-    const router = useRouter()
-    const auth = getAuth(app)
-    const userStore = useUserStore()
+const router = useRouter()
+const auth = getAuth(app)
+const userStore = useUserStore()
 
-    const handleSubmit = async () => {
-      userStore.clearErrorMessage()
-      try {
-        if (userStore.isSignUp) {
-          const userCredential = await createUserWithEmailAndPassword(
-            auth,
-            userStore.email,
-            userStore.password
-          )
-          const userDocRef = doc(getFirestore(), 'users', userCredential.user.uid)
-          await setDoc(userDocRef, { username: userStore.username })
-        } else {
-          await signInWithEmailAndPassword(auth, userStore.email, userStore.password)
-        }
-        router.push('/chat')
-      } catch (error) {
-        console.error('Authentication error:', error)
-        const friendlyMessage = getFriendlyErrorMessage(error.code)
-        userStore.setErrorMessage(friendlyMessage)
-      }
+const handleSubmit = async () => {
+  userStore.clearErrorMessage()
+  try {
+    if (userStore.isSignUp) {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        userStore.email,
+        userStore.password
+      )
+      const userDocRef = doc(getFirestore(), 'users', userCredential.user.uid)
+      await setDoc(userDocRef, { username: userStore.username })
+    } else {
+      await signInWithEmailAndPassword(auth, userStore.email, userStore.password)
     }
-    const handleGuestLogin = async () => {
-      try {
-        await signInAnonymously(auth)
-        router.push('/chat')
-      } catch (error) {
-        console.error('Guest login error:', error)
-      }
-    }
+    router.push('/chat')
+  } catch (error) {
+    console.error('Authentication error:', error)
+    const friendlyMessage = getFriendlyErrorMessage(error.code)
+    userStore.setErrorMessage(friendlyMessage)
+  }
+}
 
-    return { handleSubmit, handleGuestLogin, userStore }
+const handleGuestLogin = async () => {
+  try {
+    await signInAnonymously(auth)
+    router.push('/chat')
+  } catch (error) {
+    console.error('Guest login error:', error)
   }
 }
 </script>

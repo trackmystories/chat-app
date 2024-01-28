@@ -56,7 +56,7 @@ const props = defineProps({
   },
   currentUserId: {
     type: String,
-    default: ''
+    default: null
   }
 })
 
@@ -64,6 +64,7 @@ const newMessage = ref('')
 
 const sendMessage = (message: string) => {
   console.log('message', message)
+  console.log('canSendMessage:', props.canSendMessage)
   props.onSendMessage(message)
   newMessage.value = ''
 }
