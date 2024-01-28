@@ -1,7 +1,7 @@
 <template>
   <div id="login">
     <h1 class="title">WELCOME TO CHAT APP</h1>
-    <form @submit.prevent="handleSubmit">
+    <form class="form" @submit.prevent="handleSubmit">
       <div v-if="userStore.isSignUp">
         <input
           placeholder="username"
@@ -93,9 +93,17 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #login {
-  margin: auto;
+  width: 100%;
+}
+
+form {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
 }
 
 label {
@@ -106,7 +114,7 @@ label {
 input[type='text'],
 input[type='email'],
 input[type='password'] {
-  width: 100%;
+  width: 365px;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;

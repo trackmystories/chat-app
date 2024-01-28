@@ -91,6 +91,21 @@ onUnmounted(() => {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  margin: 10px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
 @media (max-width: 768px) {
   .left,
   .right {
