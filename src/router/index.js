@@ -1,9 +1,9 @@
-import { createRouter, createWebHistory, RouteRecordRaw, Router } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import ChatView from '@/views/ChatView.vue'
 import LoginView from '@/views/LoginView.vue'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
-const routes: Array<RouteRecordRaw> = [
+const routes = [
   {
     path: '/chat',
     name: 'chat',
@@ -21,7 +21,7 @@ const routes: Array<RouteRecordRaw> = [
   }
 ]
 
-const router: Router = createRouter({
+const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes
 })

@@ -1,6 +1,6 @@
 <template>
   <div id="login">
-    <h1 class="title">WELCOME TO CHAT APP</h1>
+    <h1>WELCOME TO CHAT APP</h1>
     <form @submit.prevent="handleSubmit">
       <div v-if="userStore.isSignUp">
         <input
@@ -87,30 +87,22 @@ export default {
 
 <style>
 #login {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+  margin: auto;
 }
 
 label {
   display: block;
   margin-bottom: 5px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 0.9rem;
-  text-align: center;
-  color: #2e5799;
 }
 
 input[type='text'],
 input[type='email'],
 input[type='password'] {
   width: 100%;
-  height: 60px;
+  padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-top: 10px;
-  width: 375px;
   margin-bottom: 10px;
 }
 
@@ -129,26 +121,10 @@ button:hover {
   background-color: #45a049;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-  width: 375px;
-}
-
-.title {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 1.5rem;
-  text-align: center;
-  color: #45a049;
-  margin-bottom: 20px;
-}
-
-.error-message {
-  color: red;
-  text-align: center;
-  margin-bottom: 10px;
+@media (min-width: 600px) {
+  #login {
+    max-width: 400px;
+    margin: 0 auto;
+  }
 }
 </style>
