@@ -27,26 +27,48 @@
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
+<script lang="ts" setup>
+import { ref, defineProps, PropType } from 'vue'
 
-// Props
+interface Message {
+  id: string
+  userId: string
+  username: string
+  text: string
+  createdAt: Date
+}
+
+type SendMessageFunction = (message: string) => void
+
+// Using defineProps with direct object syntax
 const props = defineProps({
-  messages: Array,
-  onSendMessage: Function,
-  canSendMessage: Boolean,
-  currentUserId: String
+  messages: {
+    type: Array as () => Message[],
+    default: () => []
+  },
+  onSendMessage: {
+    type: Function as PropType<SendMessageFunction>,
+    default: () => {}
+  },
+  canSendMessage: {
+    type: Boolean,
+    default: false
+  },
+  currentUserId: {
+    type: String,
+    default: ''
+  }
 })
 
 const newMessage = ref('')
 
-const sendMessage = (message) => {
+const sendMessage = (message: string) => {
   console.log('message', message)
   props.onSendMessage(message)
   newMessage.value = ''
 }
 
-const toLocalTime = (utcDate) => {
+const toLocalTime = (utcDate: Date): string => {
   const date = new Date(utcDate)
   return date.toLocaleString()
 }

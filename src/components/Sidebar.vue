@@ -14,17 +14,25 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineProps, defineEmits } from 'vue'
 
-defineProps({
-  chats: Array,
+interface Chat {
+  id: string
+  name: string
+  about: string
+}
+
+const props = defineProps({
+  chats: Array as () => Chat[],
   selectedChatId: String
 })
 
-const emit = defineEmits(['selectChat'])
+const emit = defineEmits<{
+  (event: 'selectChat', chatId: string): void
+}>()
 
-const selectChat = (chatId) => {
+const selectChat = (chatId: string) => {
   emit('selectChat', chatId)
 }
 </script>

@@ -4,5 +4,10 @@
       "@/*": ["./src/*"]
     }
   },
+  "transform": {
+    "^.+\\.vue$": "vue-jest",
+    "^.+\\.tsx?$": "ts-jest", // Add this line
+    "^.+\\.jsx?$": "babel-jest"
+  },
   "exclude": ["node_modules", "dist"]
 }
