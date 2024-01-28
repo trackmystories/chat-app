@@ -74,7 +74,7 @@ export default {
       } catch (error) {
         console.error('Authentication error:', error)
         const friendlyMessage = getFriendlyErrorMessage(error.code)
-        userStore.setErrorMessage(friendlyMessage) // Set friendly error message
+        userStore.setErrorMessage(friendlyMessage)
       }
     }
     const handleGuestLogin = async () => {
@@ -84,7 +84,7 @@ export default {
       } catch (error) {
         console.error('Guest login error:', error)
         const friendlyMessage = getFriendlyErrorMessage(error.code)
-        userStore.setErrorMessage(friendlyMessage) // Set friendly error message
+        userStore.setErrorMessage(friendlyMessage)
       }
     }
 
