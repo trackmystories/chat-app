@@ -75,7 +75,7 @@ const handleSubmit = async () => {
       await signInWithEmailAndPassword(auth, userStore.email, userStore.password)
     }
     router.push('/chat')
-  } catch (error) {
+  } catch (error: any) {
     console.error('Authentication error:', error)
     const friendlyMessage = getFriendlyErrorMessage(error.code)
     userStore.setErrorMessage(friendlyMessage)

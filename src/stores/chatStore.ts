@@ -59,7 +59,7 @@ export const useChatStore = defineStore('chatStore', {
     messages: [] as Message[],
     currentUser: null as User | null,
     currentUserId: '' as string,
-    currentUserUsername: ''
+    currentUserUsername: '' as string
   }),
   actions: {
     updateCurrentUser(user) {
