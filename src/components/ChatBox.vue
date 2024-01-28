@@ -10,68 +10,36 @@
         }"
         class="message"
       >
-        <div>
-          {{ message.username }}: <span>{{ message.text }}</span>
-        </div>
-        <div class="createdAt">
-          createdAt : <span>{{ toLocalTime(message.createdAt) }}</span>
-        </div>
+        <strong>{{ message.username }}:</strong> <span>{{ message.text }}</span>
       </div>
     </div>
     <div v-if="canSendMessage">
       <form @submit.prevent="sendMessage(newMessage)">
-        <input v-model="newMessage" placeholder="message..." />
+        <input v-model="newMessage" placeholder="Type a message" />
         <button type="submit">Send</button>
       </form>
     </div>
   </div>
 </template>
 
-<script lang="ts" setup>
-import { ref, defineProps, PropType } from 'vue'
+<script setup>
+import { ref } from 'vue'
 
-interface Message {
-  id: string
-  userId: string
-  username: string
-  text: string
-  createdAt: Date
-}
-
-type SendMessageFunction = (message: string) => void
-
-// Using defineProps with direct object syntax
+// Props
 const props = defineProps({
-  messages: {
-    type: Array as () => Message[],
-    default: () => []
-  },
-  onSendMessage: {
-    type: Function as PropType<SendMessageFunction>,
-    default: () => {}
-  },
-  canSendMessage: {
-    type: Boolean,
-    default: false
-  },
-  currentUserId: {
-    type: String,
-    default: null
-  }
+  messages: Array,
+  onSendMessage: Function,
+  canSendMessage: Boolean,
+  currentUserId: String
 })
 
 const newMessage = ref('')
 
-const sendMessage = (message: string) => {
+const sendMessage = (message) => {
   console.log('message', message)
-  console.log('canSendMessage:', props.canSendMessage)
   props.onSendMessage(message)
   newMessage.value = ''
-}
-
-const toLocalTime = (utcDate: Date): string => {
-  const date = new Date(utcDate)
-  return date.toLocaleString()
+  console.log('currentUserId', props.currentUserId)
 }
 </script>
 

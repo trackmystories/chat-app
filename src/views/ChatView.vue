@@ -22,8 +22,8 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { onMounted } from 'vue'
+<script setup>
+import { onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
 import ChatBox from '../components/ChatBox.vue'
@@ -57,6 +57,10 @@ onMounted(() => {
   if (chatStore.chats.length > 0) {
     chatStore.selectChat(chatStore.chats[0].id)
   }
+})
+
+onUnmounted(() => {
+  if (unsubscribe) unsubscribe()
 })
 </script>
 

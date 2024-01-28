@@ -2,7 +2,7 @@
   <input :type="type" :placeholder="placeholder" :value="value" @input="handleInput" />
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue'
 
 export default defineComponent({
@@ -22,8 +22,8 @@ export default defineComponent({
     }
   },
   methods: {
-    handleInput(event: Event) {
-      const target = event.target as HTMLInputElement
+    handleInput(event) {
+      const target = event.target
       if (target) {
         this.$emit('update:value', target.value)
       }
