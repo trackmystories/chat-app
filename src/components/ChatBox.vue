@@ -11,6 +11,7 @@
         class="message"
       >
         <strong>{{ message.username }}:</strong> <span>{{ message.text }}</span>
+        <span>{{ toLocalTime(message.createdAt) }}</span>
       </div>
     </div>
     <div v-if="canSendMessage">
@@ -39,6 +40,11 @@ const sendMessage = (message) => {
   props.onSendMessage(message)
   newMessage.value = ''
   console.log('currentUserId', props.currentUserId)
+}
+
+const toLocalTime = (utcDate) => {
+  const date = new Date(utcDate)
+  return date.toLocaleString()
 }
 </script>
 
