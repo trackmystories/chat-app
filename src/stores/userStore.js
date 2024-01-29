@@ -28,7 +28,6 @@ export const useUserStore = defineStore('user', {
       try {
         await signInAnonymously(auth)
         this.isGuest = true
-        // Additional logic after successful guest login (e.g., navigate to chat)
       } catch (error) {
         console.error('Guest login error:', error)
         this.isGuest = false

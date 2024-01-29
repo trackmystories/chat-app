@@ -25,7 +25,6 @@
 <script setup>
 import { ref } from 'vue'
 
-// Props
 const props = defineProps({
   messages: Array,
   onSendMessage: Function,
