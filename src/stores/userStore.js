@@ -1,14 +1,11 @@
 import { defineStore } from 'pinia'
-import { getAuth, signInAnonymously } from 'firebase/auth'
-import app from '@/firebase'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
     email: '',
     password: '',
     username: '',
-    isSignUp: false,
-    isGuest: false
+    isSignUp: false
   }),
   actions: {
     updateEmail(newEmail) {
@@ -22,16 +19,6 @@ export const useUserStore = defineStore('user', {
     },
     toggleSignUp() {
       this.isSignUp = !this.isSignUp
-    },
-    async signInAsGuest() {
-      const auth = getAuth(app)
-      try {
-        await signInAnonymously(auth)
-        this.isGuest = true
-      } catch (error) {
-        console.error('Guest login error:', error)
-        this.isGuest = false
-      }
     },
     setErrorMessage(message) {
       this.errorMessage = message
